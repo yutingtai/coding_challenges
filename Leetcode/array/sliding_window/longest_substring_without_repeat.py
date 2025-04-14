@@ -10,18 +10,6 @@
 
 
 
-def find_sentence_indices(paragraph: str, sentence: str):
-    start_index = paragraph.find(sentence)
-    if start_index == -1:
-        return -1, -1  # Sentence not found
-
-    end_index = start_index + len(sentence) - 1
-    return start_index, end_index
-
-
-paragraph = ""
-
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         start_pointer, end_pointer = 0, 0
