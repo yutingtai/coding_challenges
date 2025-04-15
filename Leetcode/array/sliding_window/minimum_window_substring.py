@@ -10,7 +10,8 @@
 # Output: ""
 # Explanation: Both 'a's from t must be included in the window.
 # Since the largest window of s only has one 'a', return empty string.
-from collections import Counter
+from collections import Counter, defaultdict
+import unittest
 
 
 class Solution:
@@ -49,42 +50,31 @@ class Solution:
 
 
 
-class Solu:
-    def minWindow(self, s:str, t:str) -> str:
-        if not s or not t:
-            return ""
-        
-        t_count = Counter(t)
-        distinct_t_len = len(t_count)
-        left = 0
-        matched = 0
-        window_count = Counter()
+class TestCase(unittest.TestCase):
+    def setUp(self):
+        self.s = Solution()
 
-        ans = float("inf"), 0 , 0 # min_length, left , right
 
-        for right in range(len(s)):
-            window_count[s[right]] += 1
+    def test1(self):
+        s = "ADOBECODEBANC"
+        t = "ABC"
+        ans = self.s.minWindow(s, t)
+        self.assertEqual(ans, "BANC")
 
-            if window_count[s[right]] == t_count[s[right]]:
-                matched += 1
-            
-            while left <= right and distinct_t_len == matched:
-                if right - left + 1 < ans[0]:
-                    ans = right - left + 1 , left , right
-                
-                left_ch = s[left]
-                window_count[left_ch] -= 1
-                if window_count[left_ch] < t_count[left_ch]:
-                    matched -= 1
-                left += 1
-        return s[ans[1]:ans[2]+1] if ans[0] != float("inf") else ""
+    def test2(self):
+        s = "a"
+        t = "a"
+        ans = self.s.minWindow(s, t)
+        self.assertEqual(ans, "a")
+
+    def test3(self):
+        s = "a"
+        t = "aa"
+        ans = self.s.minWindow(s, t)
+        self.assertEqual(ans, "")
 
 if __name__ == "__main__":
-    s = Solution()
-    ss = Solu()
-    length = s.minWindow(s = "ADOBECODEBANC", t = "ABC")
-    leng = ss.minWindow(s = "ADOBECODEBANC", t = "ABC")
-    print(leng)
+    unittest.main()
 
                 
 
